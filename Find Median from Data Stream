@@ -1,0 +1,26 @@
+//Uses array but Sorting the array every time you call findMedian() can be inefficient, especially when the array size grows large. 
+//consider using a more advanced data structure like a balanced binary search tree, two heaps, or a sorted linked list for more 
+//efficient median calculation
+
+class MedianFinder {
+public:
+    vector<int> arr;
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        arr.push_back(num);
+    }
+    
+    double findMedian() {
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        if(n%2!=0)
+            return arr[n/2];
+        double val = arr[n/2-1]+arr[n/2];
+        return val/2;
+    }
+};
+
+//Using Two heaps to store: a max heap to store the smaller half of the numbers and a min heap to store the larger half.
