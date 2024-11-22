@@ -1,0 +1,6 @@
+Using BFS and not DFS because:
+we need to find the smallest number or rotations. With DFS you'll need to evaluate all possible combinations and select the lowest one. 
+With BFS you stop checking combinations as soon as you find a valid combination.
+
+BFS is well-suited for finding the shortest path in unweighted graphs. Due to its level-order exploration strategy, BFS guarantees 
+that the first time it reaches a node, it has found the shortest path to that node.
