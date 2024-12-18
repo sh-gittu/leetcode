@@ -1,0 +1,44 @@
+### Using Stack  ###
+
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<int> numStack;      // Stack for storing numbers (repeat counts)
+        stack<string> strStack;    // Stack for storing strings before '['
+        string temp = "";          // Temporary string to build the result
+        int digits = 0;            // To hold the current number (repeat count)
+        
+        for (int i = 0; i < s.size(); i++) {
+            if (isdigit(s[i])) {
+                // Build the current number (it can be more than one digit)
+                digits = digits * 10 + (s[i] - '0');
+            }
+            else if (s[i] == '[') {
+                // Push the current repeat count and string onto the stacks
+                numStack.push(digits);
+                strStack.push(temp);
+                digits = 0;  // Reset the digits for the next number
+                temp = "";   // Reset the current string
+            }
+            else if (s[i] == ']') {
+                // Pop the repeat count and previous string
+                int repeatCount = numStack.top();
+                numStack.pop();
+                string prevString = strStack.top();
+                strStack.pop();
+                
+                // Repeat the current temp string and append to the previous string
+                string repeatedStr = "";
+                for (int j = 0; j < repeatCount; j++) {
+                    repeatedStr += temp;
+                }
+                temp = prevString + repeatedStr;  // Append to the string before '['
+            }
+            else {
+                // Build the current temp string
+                temp += s[i];
+            }
+        }
+        return temp;
+    }
+};
