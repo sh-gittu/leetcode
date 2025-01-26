@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void findPaths(vector<string>& paths, string path, TreeNode* node) {
+        if(node==NULL)
+            return ;
+        path += to_string(node->val);
+        if(node->left) {
+            findPaths(paths, path + "->", node->left);
+        }
+        if(node->right)
+            findPaths(paths, path + "->", node->right);
+
+        if(node->left==NULL and node->right==NULL)
+            paths.push_back(path);
+        return;
+    }
+
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> paths;
+        string path = "";
+        findPaths(paths, path, root);
+        return paths;
+    }
+};
